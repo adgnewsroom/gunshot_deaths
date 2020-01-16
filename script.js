@@ -113,6 +113,7 @@ function bubbleChart() {
         // group: d.group,
         year: d.year,
         county: d.county,
+        age: d.age,
         dob: d.dob,
         dod: d.dod,
         sex: d.sex,
@@ -279,12 +280,15 @@ function bubbleChart() {
     var content = '<span class="name">' +
                   d.name + ' </span><span class="dob">(' + d.dob + ' - ' + d.dod +
                   ')</span><br/>' +
-                  '<span class="name">Manner: </span><span class="value">' +
+                  '<span class="category">Manner: </span><span class="value">' +
                   d.manner +
                   '</span><br/>' +
-                  '<span class="name">Age: </span><span class="value">' +
+                  '<span class="category">Age: </span><span class="value">' +
                   d.age +
-                  '</span>';
+                  '</span><br/>' +
+                  '<span class="category">County: </span><span class="value">' +
+                  d.county
+                  ;
 
     tooltip.showTooltip(content, d3.event);
   }
