@@ -416,8 +416,8 @@ function bubbleChart() {
     d3.select(this).attr('stroke', 'black');
 
     var content = '<span class="name">' +
-                  d.name + ' </span><span class="dob">(' + d.dob + ' - ' + d.dod +
-                  ')</span><br/>' +
+                  d.name + '</span><br/>' + ' </span><span class="dob">' + d.dob + ' - ' + d.dod +
+                  '</span><br/>' +
                   '<span class="category">Manner: </span><span class="value">' +
                   d.manner +
                   '</span><br/>' +

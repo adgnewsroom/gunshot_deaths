@@ -36,7 +36,7 @@ a, a:visited, a:active {
 
 h1 {
   font-family: 'Roboto', sans-serif;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .year {
@@ -84,6 +84,13 @@ h1 {
 }
 
 .tooltip .dob {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.tooltip .value {
+  font-family: 'Roboto', sans-serif;
   font-size: 15px;
   font-weight: bold;
 }
