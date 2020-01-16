@@ -34,7 +34,18 @@ a, a:visited, a:active {
   margin-top: 10px;
 }
 
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+}
+
 .year {
+  font-size: 21px;
+  fill: #aaa;
+  cursor: default;
+}
+
+.age {
   font-size: 21px;
   fill: #aaa;
   cursor: default;
@@ -67,8 +78,14 @@ a, a:visited, a:active {
 
 .tooltip .name {
   font-size: 20px;
+  font-family: 'Gelasio', serif;
   font-weight: bold;
   color: dimgrey
+}
+
+.tooltip .dob {
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .footer {

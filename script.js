@@ -14,9 +14,10 @@ function bubbleChart() {
   // tooltip for mouseover functionality
   var tooltip = floatingTooltip('tooltip', 240);
 
-  // Locations to move bubbles towards, depending
-  // on which view mode is selected.
-  var center = { x: width / 2, y: height / 2 };
+
+
+
+
 
   var ageCenters = {
     low: { x: width / 3, y: height / 2 },
@@ -26,24 +27,42 @@ function bubbleChart() {
 
   // X locations of the year titles.
   var agesTitleX = {
-    low: 160,
-    medium: width / 2,
-    high: width - 160
+    "0-5": 160,
+    "6-11": width / 2,
+    "12-18": width - 160
   };
 
 
+
+
+  // Locations to move bubbles towards, depending
+  // on which view mode is selected.
+  var center = { x: width / 4, y: height / 4 };
+
   var yearCenters = {
-    2012: { x: width / 3, y: height / 2 },
-    2013: { x: width / 2, y: height / 2 },
-    2014: { x: 2 * width / 3, y: height / 2 }
+    2012: { x: width / 6, y: height / 2 },
+    2013: { x: width / 3 - 30, y: height / 2 },
+    2014: { x: width / 2 - 30, y: height / 2 },
+    2015: { x: 1.9 * width / 3 - 30, y: height / 2 },
+    2016: { x: 2.4 * width / 3 - 30, y: height / 2 },
+    2017: { x: 2.7 * width / 3 + 10, y: height / 2 }
   };
 
   // X locations of the year titles.
   var yearsTitleX = {
-    2012: 160,
-    2013: width / 2,
-    2014: width - 160
+    2012: 150,
+    2013: width - 750,
+    2014: width - 580,
+    2015: width - 410,
+    2016: width - 230,
+    2017: width - 60
   };
+
+
+
+
+
+
 
   // @v4 strength to apply to the position forces
   var forceStrength = 0.03;
@@ -81,9 +100,43 @@ function bubbleChart() {
     .force('charge', d3.forceManyBody().strength(charge))
     .on('tick', ticked);
 
+
+
+
+
+
+
+
+
+
+    var simulation1 = d3.forceSimulation()
+      .velocityDecay(0.2)
+      .force('x', d3.forceX().strength(forceStrength).x(center.x))
+      .force('y', d3.forceY().strength(forceStrength).y(center.y))
+      .force('charge', d3.forceManyBody().strength(charge))
+      .on('tick', ticked1);
+
+
+
+
+
+
+
+
+
   // @v4 Force starts up automatically,
   //  which we don't want as there aren't any nodes yet.
   simulation.stop();
+
+
+
+  simulation1.stop();
+
+
+
+
+
+
 
   // Nice looking colors - no reason to buck the trend
   // @v4 scales now have a flattened naming scheme
@@ -107,14 +160,14 @@ function bubbleChart() {
   function createNodes(rawData) {
     // Use the max total_amount in the data as the max in the scale's domain
     // note we have to ensure the total_amount is a number.
-    var maxAmount = d3.max(rawData, function (d) { return +d.total_amount; });
+    // var maxAmount = d3.max(rawData, function (d) { return +d.total_amount; });
 
     // Sizes bubbles based on area.
     // @v4: new flattened scale names.
-    var radiusScale = d3.scalePow()
-      .exponent(0.5)
-      .range([2, 85])
-      .domain([0, maxAmount]);
+    // var radiusScale = d3.scalePow()
+    //   .exponent(0.5)
+    //   .range([2, 85])
+    //   .domain([0, maxAmount]);
 
     // Use map() to convert raw data into node data.
     // Checkout http://learnjsdata.com/ for more on
@@ -199,8 +252,23 @@ function bubbleChart() {
     // @v4 Once we set the nodes, the simulation will start running automatically!
     simulation.nodes(nodes);
 
+
+
+
+
+
+    simulation1.nodes(nodes);
+
+
+
+
+
+
     // Set initial layout to single group.
     groupBubbles();
+
+
+
     groupBubbles1();
   };
 
@@ -213,6 +281,14 @@ function bubbleChart() {
    * These x and y values are modified by the force simulation.
    */
   function ticked() {
+    bubbles
+      .attr('cx', function (d) { return d.x; })
+      .attr('cy', function (d) { return d.y; });
+  }
+
+
+
+  function ticked1() {
     bubbles
       .attr('cx', function (d) { return d.x; })
       .attr('cy', function (d) { return d.y; });
@@ -253,10 +329,10 @@ function bubbleChart() {
     hideAgeTitles();
 
     // @v4 Reset the 'x' force to draw the bubbles to the center.
-    simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
+    simulation1.force('x', d3.forceX().strength(forceStrength).x(center.x));
 
     // @v4 We can reset the alpha value and restart the simulation
-    simulation.alpha(1).restart();
+    simulation1.alpha(1).restart();
   }
   /*
    * Sets visualization in "split by year mode".
@@ -278,10 +354,10 @@ function bubbleChart() {
     showAgeTitles();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
-    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPos));
+    simulation1.force('x', d3.forceX().strength(forceStrength).x(nodeAgePos));
 
     // @v4 We can reset the alpha value and restart the simulation
-    simulation.alpha(1).restart();
+    simulation1.alpha(1).restart();
   }
 
 
