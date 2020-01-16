@@ -187,10 +187,9 @@ function bubbleChart() {
 
     // Set initial layout to single group.
     groupBubbles();
+    groupBubbles1();
   };
 
-  groupBubbles1();
-};
 
   /*
    * Callback function that is called after every tick of the
