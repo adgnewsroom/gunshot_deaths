@@ -18,17 +18,17 @@ function bubbleChart() {
   // on which view mode is selected.
   var center = { x: width / 2, y: height / 2 };
 
-  var yearCenters = {
-    2012: { x: width / 3, y: height / 2 },
-    2013: { x: width / 2, y: height / 2 },
-    2014: { x: 2 * width / 3, y: height / 2 }
+  var ageCenters = {
+    low: { x: width / 3, y: height / 2 },
+    medium: { x: width / 2, y: height / 2 },
+    high: { x: 2 * width / 3, y: height / 2 }
   };
 
   // X locations of the year titles.
-  var yearsTitleX = {
-    2012: 160,
-    2013: width / 2,
-    2014: width - 160
+  var agesTitleX = {
+    low: 160,
+    medium: width / 2,
+    high: width - 160
   };
 
   // @v4 strength to apply to the position forces
@@ -114,6 +114,7 @@ function bubbleChart() {
         year: d.year,
         county: d.county,
         age: d.age,
+        age_range: d.age_range,
         dob: d.dob,
         dod: d.dod,
         sex: d.sex,
@@ -188,6 +189,9 @@ function bubbleChart() {
     groupBubbles();
   };
 
+  groupBubbles1();
+};
+
   /*
    * Callback function that is called after every tick of the
    * force simulation.
@@ -210,6 +214,12 @@ function bubbleChart() {
   }
 
 
+  function nodeAgePos(d) {
+    return ageCenters[d.age_range].x;
+  }
+
+
+
   /*
    * Sets visualization in "single group mode".
    * The year labels are hidden and the force layout
@@ -226,7 +236,15 @@ function bubbleChart() {
     simulation.alpha(1).restart();
   }
 
+  function groupBubbles1() {
+    hideAgeTitles();
 
+    // @v4 Reset the 'x' force to draw the bubbles to the center.
+    simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
+
+    // @v4 We can reset the alpha value and restart the simulation
+    simulation.alpha(1).restart();
+  }
   /*
    * Sets visualization in "split by year mode".
    * The year labels are shown and the force layout
@@ -243,11 +261,26 @@ function bubbleChart() {
     simulation.alpha(1).restart();
   }
 
+  function splitBubbles1() {
+    showAgeTitles();
+
+    // @v4 Reset the 'x' force to draw the bubbles to their year centers
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPos));
+
+    // @v4 We can reset the alpha value and restart the simulation
+    simulation.alpha(1).restart();
+  }
+
+
   /*
    * Hides Year title displays.
    */
   function hideYearTitles() {
     svg.selectAll('.year').remove();
+  }
+
+  function hideAgeTitles() {
+    svg.selectAll('.age_range').remove();
   }
 
   /*
@@ -263,6 +296,22 @@ function bubbleChart() {
     years.enter().append('text')
       .attr('class', 'year')
       .attr('x', function (d) { return yearsTitleX[d]; })
+      .attr('y', 40)
+      .attr('text-anchor', 'middle')
+      .text(function (d) { return d; });
+  }
+
+
+  function showAgeTitles() {
+    // Another way to do this would be to create
+    // the year texts once and then just hide them.
+    var agesData = d3.keys(agesTitleX);
+    var ages = svg.selectAll('.age_range')
+      .data(agesData);
+
+    ages.enter().append('text')
+      .attr('class', 'age_range')
+      .attr('x', function (d) { return agesTitleX[d]; })
       .attr('y', 40)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
@@ -316,6 +365,15 @@ function bubbleChart() {
       splitBubbles();
     } else {
       groupBubbles();
+    }
+  };
+
+
+  chart.toggleDisplay = function (displayName) {
+    if (displayName === 'age_range') {
+      splitBubbles1();
+    } else {
+      groupBubbles1();
     }
   };
 
