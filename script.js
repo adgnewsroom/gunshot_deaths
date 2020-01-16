@@ -31,6 +31,20 @@ function bubbleChart() {
     high: width - 160
   };
 
+
+  var yearCenters = {
+    2012: { x: width / 3, y: height / 2 },
+    2013: { x: width / 2, y: height / 2 },
+    2014: { x: 2 * width / 3, y: height / 2 }
+  };
+
+  // X locations of the year titles.
+  var yearsTitleX = {
+    2012: 160,
+    2013: width / 2,
+    2014: width - 160
+  };
+
   // @v4 strength to apply to the position forces
   var forceStrength = 0.03;
 
