@@ -54,7 +54,7 @@ function bubbleChart() {
   // @v4 Before the charge was a stand-alone attribute
   //  of the force layout. Now we can use it as a separate force!
   function charge(d) {
-    return -Math.pow(d.radius, 2.3) * forceStrength;
+    return -Math.pow(d.radius, 2.4) * forceStrength;
   }
 
   // Here we create a force layout and
@@ -107,7 +107,7 @@ function bubbleChart() {
     // working with data.
     var myNodes = rawData.map(function (d) {
       return {
-        radius: (8),
+        radius: (9),
         name: d.name,
         manner: d.manner,
         // group: d.group,
