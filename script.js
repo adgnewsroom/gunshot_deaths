@@ -277,14 +277,14 @@ function bubbleChart() {
     d3.select(this).attr('stroke', 'black');
 
     var content = '<span class="name">' +
-                  d.name + ' </span><span class="name">(</span>' + d.dob + '-' + d.dod + ')'
-                  '</span><br/>' +
+                  d.name + ' </span><span class="dob">(' + d.dob + ' - ' + d.dod +
+                  ')</span><br/>' +
                   '<span class="name">Manner: </span><span class="value">' +
                   d.manner +
                   '</span><br/>' +
-                  '<span class="name">Year: </span><span class="value">' +
-                  d.year +
-                  '</span>' + d.narrative;
+                  '<span class="name">Age: </span><span class="value">' +
+                  d.age +
+                  '</span>';
 
     tooltip.showTooltip(content, d3.event);
   }

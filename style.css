@@ -61,9 +61,15 @@ a, a:visited, a:active {
 }
 
 .tooltip .name {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   color: dimgrey
+}
+
+.tooltip .dob {
+  font-size: 12px;
+  font-weight: bold;
+  color: black
 }
 
 .footer {
