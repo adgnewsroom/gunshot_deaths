@@ -390,7 +390,7 @@ function bubbleChart() {
       .attr('x', function (d) { return yearsTitleX[d]; })
       .attr('y', 20)
       .attr('text-anchor', 'middle')
-      .text(function (d) { return d; });
+      .text(function (d) { return d; })
   }
 
 
