@@ -15,10 +15,6 @@ function bubbleChart() {
   var tooltip = floatingTooltip('tooltip', 240);
 
 
-
-
-
-
   var ageCenters = {
     low: { x: width / 3, y: height },
     medium: { x: width / 2, y: height },
@@ -33,39 +29,53 @@ function bubbleChart() {
   };
 
 
-
-
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
   var center = { x: width / 2, y: height / 3 };
 
   var yearCenters = {
-    2012: { x: width / 6, y: height / 2 },
-    2013: { x: width / 3 - 30, y: height / 2 },
-    2014: { x: width / 2 - 30, y: height / 2 },
-    2015: { x: 1.9 * width / 3 - 30, y: height / 2 },
-    2016: { x: 2.4 * width / 3 - 30, y: height / 2 },
-    2017: { x: 2.7 * width / 3 + 10, y: height / 2 }
+    2012: { x: width / 6 - 50, y: height / 2 },
+    2013: { x: width / 3 - 50, y: height / 2 },
+    2014: { x: width / 2 - 50, y: height / 2 },
+    2015: { x: 1.9 * width / 3 - 50, y: height / 2 },
+    2016: { x: 2.4 * width / 3 - 50, y: height / 2 },
+    2017: { x: 2.7 * width / 3 - 10, y: height / 2 }
   };
 
   // X locations of the year titles.
   var yearsTitleX = {
-    2012: 150,
-    2013: width - 750,
-    2014: width - 580,
-    2015: width - 410,
+    2012: 80,
+    2013: width - 700,
+    2014: width - 530,
+    2015: width - 380,
     2016: width - 230,
-    2017: width - 60
+    2017: width - 80
   };
 
 
+  var mannerCenters = {
+    Homicide: { x: width / 5, y: height },
+    Accident: { x: width / 4 + 120, y: height },
+    Suicide: { x: 2 * width / 3 - 80, y: height },
+    Undetermined: { x: width - 220, y: height }
 
+  };
+
+  // X locations of the year titles.
+  var mannersTitleX = {
+    "Homicide": 170,
+    "Accident": width - 590,
+    "Suicide": width - 390,
+    "Undetermined": width - 180,
+  };
 
 
 
 
   // @v4 strength to apply to the position forces
   var forceStrength = 0.05;
+  // var forceStrength1 = 0.08;
+
 
   // These will be set in create_nodes and create_vis
   var svg = null;
@@ -87,8 +97,9 @@ function bubbleChart() {
   // @v4 Before the charge was a stand-alone attribute
   //  of the force layout. Now we can use it as a separate force!
   function charge(d) {
-    return -Math.pow(d.radius, 2.2) * forceStrength;
+    return -Math.pow(d.radius, 2.3) * forceStrength;
   }
+
 
   // Here we create a force layout and
   // @v4 We create a force simulation now and
@@ -101,38 +112,9 @@ function bubbleChart() {
     .on('tick', ticked);
 
 
-
-
-
-
-
-
-
-
-    var simulation1 = d3.forceSimulation()
-      .velocityDecay(0.3)
-      .force('x', d3.forceX().strength(forceStrength).x(center.x))
-      .force('y', d3.forceY().strength(forceStrength).y(center.y))
-      .force('charge', d3.forceManyBody().strength(charge))
-      .on('tick', ticked1);
-
-
-
-
-
-
-
-
-
   // @v4 Force starts up automatically,
   //  which we don't want as there aren't any nodes yet.
   simulation.stop();
-  simulation1.stop();
-
-
-
-
-
 
 
   // Nice looking colors - no reason to buck the trend
@@ -248,7 +230,7 @@ function bubbleChart() {
     // Set the simulation's nodes to our newly created nodes array.
     // @v4 Once we set the nodes, the simulation will start running automatically!
     simulation.nodes(nodes);
-    simulation1.nodes(nodes);
+    // simulation1.nodes(nodes);
 
 
 
@@ -275,11 +257,11 @@ function bubbleChart() {
 
 
 
-  function ticked1() {
-    bubbles
-      .attr('cx', function (d) { return d.x; })
-      .attr('cy', function (d) { return d.y; });
-  }
+  // function ticked1() {
+  //   bubbles
+  //     .attr('cx', function (d) { return d.x; })
+  //     .attr('cy', function (d) { return d.y; });
+  // }
 
   /*
    * Provides a x value for each node to be used with the split by year
@@ -289,9 +271,12 @@ function bubbleChart() {
     return yearCenters[d.year].x;
   }
 
-
   function nodeAgePos(d) {
     return ageCenters[d.age_range].x;
+  }
+
+  function nodeMannerPos(d) {
+    return mannerCenters[d.manner].x;
   }
 
 
@@ -305,6 +290,8 @@ function bubbleChart() {
   function groupBubbles() {
     hideYearTitles();
     hideAgeTitles();
+    hideMannerTitles();
+
 
     // @v4 Reset the 'x' force to draw the bubbles to the center.
     simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
@@ -331,22 +318,45 @@ function bubbleChart() {
    */
   function splitBubbles() {
     showYearTitles();
+    hideAgeTitles();
+    hideMannerTitles();
+
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPos));
+
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
   }
 
+
+
   function splitBubbles1() {
     showAgeTitles();
+    hideYearTitles();
+    hideMannerTitles();
+
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
-    simulation1.force('x', d3.forceX().strength(forceStrength).x(nodeAgePos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeAgePos));
 
     // @v4 We can reset the alpha value and restart the simulation
-    simulation1.alpha(1).restart();
+    simulation.alpha(1).restart();
+  }
+
+
+  function splitBubbles2() {
+    showMannerTitles();
+    hideYearTitles();
+    hideAgeTitles();
+
+
+    // @v4 Reset the 'x' force to draw the bubbles to their year centers
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeMannerPos));
+
+    // @v4 We can reset the alpha value and restart the simulation
+    simulation.alpha(1).restart();
   }
 
 
@@ -359,6 +369,10 @@ function bubbleChart() {
 
   function hideAgeTitles() {
     svg.selectAll('.age_range').remove();
+  }
+
+  function hideMannerTitles() {
+    svg.selectAll('.manner').remove();
   }
 
   /*
@@ -374,7 +388,7 @@ function bubbleChart() {
     years.enter().append('text')
       .attr('class', 'year')
       .attr('x', function (d) { return yearsTitleX[d]; })
-      .attr('y', 40)
+      .attr('y', 60)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -390,7 +404,23 @@ function bubbleChart() {
     ages.enter().append('text')
       .attr('class', 'age_range')
       .attr('x', function (d) { return agesTitleX[d]; })
-      .attr('y', 40)
+      .attr('y', 60)
+      .attr('text-anchor', 'middle')
+      .text(function (d) { return d; });
+  }
+
+
+  function showMannerTitles() {
+    // Another way to do this would be to create
+    // the year texts once and then just hide them.
+    var mannersData = d3.keys(mannersTitleX);
+    var manners = svg.selectAll('.manner')
+      .data(mannersData);
+
+    manners.enter().append('text')
+      .attr('class', 'manner')
+      .attr('x', function (d) { return mannersTitleX[d]; })
+      .attr('y', 60)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -445,6 +475,10 @@ function bubbleChart() {
 
     else if (displayName === 'age_range') {
       splitBubbles1();
+    }
+
+    else if (displayName === 'manner') {
+      splitBubbles2();
     }
 
     else {
