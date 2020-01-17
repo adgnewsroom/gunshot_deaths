@@ -306,7 +306,6 @@ function bubbleChart() {
     hideYearTitles();
     hideAgeTitles();
 
-
     // @v4 Reset the 'x' force to draw the bubbles to the center.
     simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
 
