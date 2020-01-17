@@ -127,9 +127,6 @@ function bubbleChart() {
   // @v4 Force starts up automatically,
   //  which we don't want as there aren't any nodes yet.
   simulation.stop();
-
-
-
   simulation1.stop();
 
 
@@ -251,12 +248,6 @@ function bubbleChart() {
     // Set the simulation's nodes to our newly created nodes array.
     // @v4 Once we set the nodes, the simulation will start running automatically!
     simulation.nodes(nodes);
-
-
-
-
-
-
     simulation1.nodes(nodes);
 
 
@@ -266,10 +257,6 @@ function bubbleChart() {
 
     // Set initial layout to single group.
     groupBubbles();
-
-
-
-    groupBubbles1();
   };
 
 
@@ -327,16 +314,16 @@ function bubbleChart() {
     simulation.alpha(1).restart();
   }
 
-  function groupBubbles1() {
-    hideYearTitles();
-    hideAgeTitles();
-
-    // @v4 Reset the 'x' force to draw the bubbles to the center.
-    simulation1.force('x', d3.forceX().strength(forceStrength).x(center.x));
-
-    // @v4 We can reset the alpha value and restart the simulation
-    simulation1.alpha(1).restart();
-  }
+  // function groupBubbles1() {
+  //   hideYearTitles();
+  //   hideAgeTitles();
+  //
+  //   // @v4 Reset the 'x' force to draw the bubbles to the center.
+  //   simulation1.force('x', d3.forceX().strength(forceStrength).x(center.x));
+  //
+  //   // @v4 We can reset the alpha value and restart the simulation
+  //   simulation1.alpha(1).restart();
+  // }
   /*
    * Sets visualization in "split by year mode".
    * The year labels are shown and the force layout
