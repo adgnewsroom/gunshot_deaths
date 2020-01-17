@@ -9,7 +9,7 @@
 function bubbleChart() {
   // Constants for sizing
   var width = 940;
-  var height = 600;
+  var height = 700;
 
   // tooltip for mouseover functionality
   var tooltip = floatingTooltip('tooltip', 240);
@@ -20,16 +20,16 @@ function bubbleChart() {
 
 
   var ageCenters = {
-    low: { x: width / 3, y: height / 2 },
-    medium: { x: width / 2, y: height / 2 },
-    high: { x: 2 * width / 3, y: height / 2 }
+    low: { x: width / 3, y: height },
+    medium: { x: width / 2, y: height },
+    high: { x: 2 * width / 3, y: height }
   };
 
   // X locations of the year titles.
   var agesTitleX = {
-    "0-5": 160,
-    "6-11": width / 2,
-    "12-18": width - 160
+    "0-5": 260,
+    "6-11": width - 510,
+    "12-18": width - 310,
   };
 
 
@@ -37,7 +37,7 @@ function bubbleChart() {
 
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
-  var center = { x: width / 4, y: height / 4 };
+  var center = { x: width / 2, y: height / 3 };
 
   var yearCenters = {
     2012: { x: width / 6, y: height / 2 },
@@ -142,7 +142,7 @@ function bubbleChart() {
   // @v4 scales now have a flattened naming scheme
   var fillColor = d3.scaleOrdinal()
     .domain(['f', 'm'])
-    .range(['#d84b2a', '#7aa25c']);
+    .range(['LightCoral', 'DodgerBlue']);
 
 
   /*
@@ -452,19 +452,23 @@ function bubbleChart() {
   chart.toggleDisplay = function (displayName) {
     if (displayName === 'year') {
       splitBubbles();
-    } else {
+    }
+    // if (displayName === 'age_range') {
+    //   splitBubbles1();
+    // }
+    else {
       groupBubbles();
     }
   };
 
 
-  chart.toggleDisplay = function (displayName) {
-    if (displayName === 'age_range') {
-      splitBubbles1();
-    } else {
-      groupBubbles1();
-    }
-  };
+  // chart.toggleDisplay = function (displayName) {
+  //   if (displayName === 'age_range') {
+  //     splitBubbles1();
+  //   } else {
+  //     groupBubbles1();
+  //   }
+  // };
 
 
   // return the chart function from closure.
