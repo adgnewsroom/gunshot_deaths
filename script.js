@@ -65,7 +65,7 @@ function bubbleChart() {
 
 
   // @v4 strength to apply to the position forces
-  var forceStrength = 0.03;
+  var forceStrength = 0.05;
 
   // These will be set in create_nodes and create_vis
   var svg = null;
@@ -87,14 +87,14 @@ function bubbleChart() {
   // @v4 Before the charge was a stand-alone attribute
   //  of the force layout. Now we can use it as a separate force!
   function charge(d) {
-    return -Math.pow(d.radius, 2.4) * forceStrength;
+    return -Math.pow(d.radius, 2.2) * forceStrength;
   }
 
   // Here we create a force layout and
   // @v4 We create a force simulation now and
   //  add forces to it.
   var simulation = d3.forceSimulation()
-    .velocityDecay(0.2)
+    .velocityDecay(0.3)
     .force('x', d3.forceX().strength(forceStrength).x(center.x))
     .force('y', d3.forceY().strength(forceStrength).y(center.y))
     .force('charge', d3.forceManyBody().strength(charge))
@@ -110,7 +110,7 @@ function bubbleChart() {
 
 
     var simulation1 = d3.forceSimulation()
-      .velocityDecay(0.2)
+      .velocityDecay(0.3)
       .force('x', d3.forceX().strength(forceStrength).x(center.x))
       .force('y', d3.forceY().strength(forceStrength).y(center.y))
       .force('charge', d3.forceManyBody().strength(charge))
