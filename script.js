@@ -31,7 +31,7 @@ function bubbleChart() {
 
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
-  var center = { x: width / 2, y: height / 3 };
+  var center = { x: width / 2, y: height / 5 };
 
   var yearCenters = {
     2012: { x: width / 6 - 50, y: height / 2 },
@@ -388,7 +388,7 @@ function bubbleChart() {
     years.enter().append('text')
       .attr('class', 'year')
       .attr('x', function (d) { return yearsTitleX[d]; })
-      .attr('y', 60)
+      .attr('y', 20)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -404,7 +404,7 @@ function bubbleChart() {
     ages.enter().append('text')
       .attr('class', 'age_range')
       .attr('x', function (d) { return agesTitleX[d]; })
-      .attr('y', 60)
+      .attr('y', 20)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -420,7 +420,7 @@ function bubbleChart() {
     manners.enter().append('text')
       .attr('class', 'manner')
       .attr('x', function (d) { return mannersTitleX[d]; })
-      .attr('y', 60)
+      .attr('y', 20)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
