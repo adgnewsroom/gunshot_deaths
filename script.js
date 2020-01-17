@@ -97,7 +97,7 @@ function bubbleChart() {
   // @v4 Before the charge was a stand-alone attribute
   //  of the force layout. Now we can use it as a separate force!
   function charge(d) {
-    return -Math.pow(d.radius, 2.4) * forceStrength;
+    return -Math.pow(d.radius, 2.35) * forceStrength;
   }
 
 
