@@ -70,8 +70,6 @@ function bubbleChart() {
   };
 
 
-
-
   // @v4 strength to apply to the position forces
   var forceStrength = 0.05;
   // var forceStrength1 = 0.08;
@@ -602,7 +600,7 @@ function floatingTooltip(tooltipId, width) {
    * event is d3.event for positioning.
    */
   function showTooltip(content, event) {
-    tt.style('opacity', 1.0)
+    tt.style('opacity', 0.8)
       .html(content);
 
     updatePosition(event);
