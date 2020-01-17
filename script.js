@@ -453,12 +453,14 @@ function bubbleChart() {
     if (displayName === 'year') {
       splitBubbles();
     }
-    // if (displayName === 'age_range') {
-    //   splitBubbles1();
-    // }
+
+    else if (displayName === 'age_range') {
+      splitBubbles1();
+    }
+
     else {
       groupBubbles();
-    }
+    };
   };
 
 
