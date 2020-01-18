@@ -435,7 +435,7 @@ function bubbleChart() {
     var content = '<span class="name">' +
                   d.name + '</span><br/>' + ' </span><span class="dob">' + d.dob + ' - ' + d.dod +
                   '</span><br/>' +
-                  '<span class="category">Manner: </span><span class="value">' +
+                  '<hr class="divider" /><span class="category">Manner: </span><span class="value">' +
                   d.manner +
                   '</span><br/>' +
                   '<span class="category">Age: </span><span class="value">' +
