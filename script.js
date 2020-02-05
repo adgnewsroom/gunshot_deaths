@@ -66,8 +66,8 @@ function bubbleChart() {
     "Homicide": 100,
     "Accident": width - 660,
     "Suicide": width - 480,
-    "Undetermined": width - 320,
-    "Other": width - 180
+    "Undetermined": width - 300,
+    "Other": width - 150
   };
 
 
