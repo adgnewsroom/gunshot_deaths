@@ -58,7 +58,7 @@ function bubbleChart() {
     Accident: { x: width / 4 + 120, y: height },
     Suicide: { x: 2 * width / 3 - 80, y: height },
     Undetermined: { x: width - 220, y: height },
-    Other: { x: width - 210, y: height }
+    Other: { x: width - 100, y: height }
   };
 
   // X locations of the year titles.
@@ -67,7 +67,7 @@ function bubbleChart() {
     "Accident": width - 590,
     "Suicide": width - 390,
     "Undetermined": width - 180,
-    "Other": width - 170
+    "Other": width - 30
   };
 
 
