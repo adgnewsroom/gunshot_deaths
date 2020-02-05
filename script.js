@@ -56,9 +56,9 @@ function bubbleChart() {
   var mannerCenters = {
     Homicide: { x: width / 5 - 70, y: height },
     Accident: { x: width / 4 + 50, y: height },
-    Suicide: { x: 2 * width / 3 - 150, y: height },
-    Undetermined: { x: width - 320, y: height },
-    Other: { x: width - 200, y: height }
+    Suicide: { x: 2 * width / 3 - 180, y: height },
+    Undetermined: { x: width - 370, y: height },
+    Other: { x: width - 240, y: height }
   };
 
   // X locations of the year titles.
