@@ -57,14 +57,14 @@ function bubbleChart() {
     Homicide: { x: width / 5 - 70, y: height },
     Accident: { x: width / 4 + 50, y: height },
     Suicide: { x: 2 * width / 3 - 150, y: height },
-    Undetermined: { x: width - 300, y: height },
+    Undetermined: { x: width - 320, y: height },
     Other: { x: width - 100, y: height }
   };
 
   // X locations of the year titles.
   var mannersTitleX = {
     "Homicide": 100,
-    "Accident": width - 560,
+    "Accident": width - 660,
     "Suicide": width - 320,
     "Undetermined": width - 130,
     "Other": width - 80
