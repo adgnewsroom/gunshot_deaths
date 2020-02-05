@@ -54,19 +54,19 @@ function bubbleChart() {
 
 
   var mannerCenters = {
-    Homicide: { x: width / 5, y: height },
-    Accident: { x: width / 4 + 120, y: height },
-    Suicide: { x: 2 * width / 3 - 80, y: height },
-    Undetermined: { x: width - 220, y: height },
-    Other: { x: width - 100, y: height }
+    Homicide: { x: width / 5 - 20, y: height },
+    Accident: { x: width / 4 + 100, y: height },
+    Suicide: { x: 2 * width / 3 - 100, y: height },
+    Undetermined: { x: width - 200, y: height },
+    Other: { x: width - 120, y: height }
   };
 
   // X locations of the year titles.
   var mannersTitleX = {
-    "Homicide": 170,
-    "Accident": width - 590,
-    "Suicide": width - 390,
-    "Undetermined": width - 180,
+    "Homicide": 150,
+    "Accident": width - 610,
+    "Suicide": width - 410,
+    "Undetermined": width - 200,
     "Other": width - 30
   };
 
